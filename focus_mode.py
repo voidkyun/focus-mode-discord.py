@@ -32,11 +32,8 @@ class FocusFor(discord.ui.View):
 			if i>0:
 				edited_message=f"Let's focus for {self.h:>02}h{self.m:>02}m!\n## {i}"
 				await interaction.followup.edit_message(message_id=message.id, content=edited_message)
-				filename='countdown.mp3'
 			else:
 				await interaction.followup.send(content='start')
-				filename='mute.mp3'
-#			await play(interaction,filename)
 		channel=interaction.user.voice.channel
 		for member in channel.members:
 			if not member.bot:
@@ -49,7 +46,6 @@ class FocusFor(discord.ui.View):
 		for member in channel.members:
 			if not member.bot:
 				await member.edit(mute=False)
-#		await play(interaction,'unmute.mp3')
 		fc_channel=interaction.message.channel
 		await fc_channel.send(content='end')
 
@@ -79,13 +75,5 @@ async def fc(ctx:discord.Interaction):
 async def on_ready():
 	print('Succesfully logined')
 	await tree.sync()
-
-@client.event
-async def on_message(message):
-	pass
-@client.event
-async def on_member_join(member):
-	if member.bot :
-		pass
 
 client.run(TOKEN)
